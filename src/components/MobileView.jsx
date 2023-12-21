@@ -5,22 +5,50 @@ function MobileView() {
 
   return (
     <div>
-      <div className="bg-yellow-400 px-12 py-2 flex justify-between items-center text-black text-3xl">
+      <div className="bg-yellow-300 px-3 py-2 flex justify-between items-center text-black text-2xl">
         <div className="font-bold pb-1">Moviez</div>
-        <i className="fas fa-bars" onClick={() => setClicked(!clicked)}></i>
+        <i
+          className="fas fa-bars pr-2"
+          onClick={() => setClicked(!clicked)}
+        ></i>
       </div>
       {clicked && (
         <>
-          <div className="flex flex-col items-center gap-7">
-            <div className="font-bold text-2xl cursor-pointer">Home</div>
-            <div className="font-bold text-2xl cursor-pointer">Movies</div>
-            <div className="font-bold text-2xl cursor-pointer">Tv Shows</div>
-            <div className="font-bold text-2xl cursor-pointer">Genre</div>
-            <div className="font-bold text-2xl cursor-pointer">Top Rated</div>
-          </div>
-          <div className="flex items-center gap-4">
-            <i className="fas fa-search text-2xl cursor-pointer"></i>
-            <i className="fas fa-user-circle text-4xl text-red-700 cursor-pointer"></i>
+          <div className="px-4 py-2 flex flex-col gap-5">
+            <div className="grid grid-cols-2 gap-5">
+              <div className="flex items-center gap-2 font-bold cursor-pointer">
+                <i className="fas fa-user"></i>
+                <div className="text-xl">Profile</div>
+              </div>
+              <div className="flex items-center gap-2 font-bold cursor-pointer">
+                <i className="fas fa-home"></i>
+                <div className="text-xl">Home</div>
+              </div>
+              <div className="flex items-center gap-2 font-bold cursor-pointer">
+                <i className="fas fa-film"></i>
+                <div className="text-xl">Movies</div>
+              </div>
+              <div className="flex items-center gap-2 font-bold cursor-pointer">
+                <i className="fas fa-tv"></i>
+                <div className="text-xl">Tv Shows</div>
+              </div>
+              <div className="flex items-center gap-2 font-bold cursor-pointer">
+                <i className="fas fa-bars-staggered"></i>
+                <div className="text-xl">Genre</div>
+              </div>
+              <div className="flex items-center gap-2 font-bold cursor-pointer">
+                <i className="fas fa-bolt"></i>
+                <div className="text-xl">Top Rated</div>
+              </div>
+            </div>
+            <div className="w-full flex items-center gap-2">
+              <input
+                type="text"
+                className="w-full px-6 py-2 text-black rounded-full"
+                placeholder="Search"
+              />
+              <i className="fas fa-search text-2xl text-black bg-yellow-400 px-2 py-1 rounded-full cursor-pointer"></i>
+            </div>
           </div>
         </>
       )}
