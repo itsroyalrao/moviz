@@ -1,7 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function MobileView() {
   const [clicked, setClicked] = useState(false);
+  const [showMovetoTop, setShowMovetoTop] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      document.documentElement.scrollTop > 2000
+        ? setShowMovetoTop(true)
+        : setShowMovetoTop(false);
+    });
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -54,6 +63,17 @@ function MobileView() {
         />
         <i className="fas fa-search text-2xl text-black bg-yellow-400 px-2 py-1 rounded-full cursor-pointer"></i>
       </div>
+      {showMovetoTop && (
+        <i
+          className="fas fa-arrow-up fixed bottom-5 right-4 text-black text-xl bg-yellow-400 px-[15px] py-2 rounded-full cursor-pointer"
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
+          }
+        />
+      )}
     </div>
   );
 }

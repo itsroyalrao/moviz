@@ -10,6 +10,7 @@ async function getMovies(pageNumber) {
 
     if (movies) {
       const imageUrlPromises = movies.map(async (movie) => {
+        await fetchMovieVideos(movie.id);
         return await getImageUrl(movie.id);
       });
 
@@ -30,6 +31,7 @@ const getImageUrl = async (movieId) => {
   try {
     const imageUrlBase = "https://image.tmdb.org/t/p/w500";
     const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`;
+
     const response = await axios.get(apiUrl);
     if (response) {
       const movieData = response.data;
@@ -44,6 +46,15 @@ const getImageUrl = async (movieId) => {
   } catch (e) {
     console.log(e);
   }
+};
+
+const fetchMovieVideos = async (movieId) => {
+  const response = await fetch(
+    `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`
+  );
+  const data = await response.json();
+  console.log(movieId, data);
+  // return data.results; // Returns an array of videos for the movie
 };
 
 export { getMovies };
