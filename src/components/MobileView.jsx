@@ -5,10 +5,10 @@ function MobileView() {
 
   return (
     <div>
-      <div className="bg-yellow-300 px-3 py-2 flex justify-between items-center text-black text-2xl">
+      <div className="bg-yellow-300 px-4 py-2 flex justify-between items-center text-black text-2xl">
         <div className="font-bold">Moviez</div>
         <i
-          className="fas fa-bars pr-2"
+          className="fas fa-bars transform transition-transform hover:rotate-90"
           onClick={() => setClicked(!clicked)}
         ></i>
       </div>
