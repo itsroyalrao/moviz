@@ -1,12 +1,14 @@
 import LaptopView from "./LaptopView";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MobileView from "./MobileView";
+import { handleScreenWidth } from "../helper/handleScreenWidth";
 
 function Navbar() {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
-  window.onresize = () => setScreenWidth(window.innerWidth);
-
+  useEffect(() => {
+    handleScreenWidth(setScreenWidth);
+  }, []);
   return <>{screenWidth > 1024 ? <LaptopView /> : <MobileView />}</>;
 }
 export default Navbar;

@@ -1,16 +1,19 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function Card({ id, imageUrl, title, overview, voteAverage }) {
+function Card({ id, imageUrl, title, voteAverage, duration, releaseDate }) {
+  const [year] = releaseDate.split("-");
   return (
     <Link to={`/movie/${id}`} className="" title={title}>
       <img src={imageUrl} alt={title} className="" />
       <div className="p-2 pt-1">
         <div className="truncate">{title}</div>
-        <div>IMDB - {voteAverage}</div>
-        {/* <div>Movie Id : {id} </div> */}
+        <div className="flex justify-between text-gray-300 text-sm">
+          <div className="bg-zinc-800 px-2 rounded">{voteAverage}</div>
+          <div>{duration}m</div>
+          <div> {year} </div>
+        </div>
       </div>
-      {/* <div>Movie Overview : {overview} </div> */}
     </Link>
   );
 }
@@ -19,8 +22,9 @@ Card.propTypes = {
   id: PropTypes.number,
   imageUrl: PropTypes.string,
   title: PropTypes.string,
-  overview: PropTypes.string,
+  releaseDate: PropTypes.string,
   voteAverage: PropTypes.number,
+  duration: PropTypes.number,
 };
 
 export default Card;

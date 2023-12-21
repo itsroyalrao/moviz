@@ -7,6 +7,7 @@ import { handleInfiniteScroll } from "../helper/handleInfiniteScroll";
 function Home() {
   const [movies, setMovies] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [showMovetoTop, setShowMovetoTop] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -14,15 +15,16 @@ function Home() {
       setMovies((prevMovies) =>
         prevMovies ? [...prevMovies, ...movies] : movies
       );
-
-      console.log(movies);
     })();
   }, [pageNumber]);
 
   useEffect(() => {
-    window.addEventListener("scroll", () =>
-      handleInfiniteScroll(setPageNumber)
-    );
+    window.addEventListener("scroll", () => {
+      handleInfiniteScroll(setPageNumber);
+      document.documentElement.scrollTop > 2000
+        ? setShowMovetoTop(true)
+        : setShowMovetoTop(false);
+    });
   }, []);
 
   return (
@@ -38,10 +40,23 @@ function Home() {
                 imageUrl={movie.imageUrl}
                 overview={movie.overview}
                 voteAverage={movie.vote_average}
+                duration={movie.duration}
+                releaseDate={movie.releaseDate}
               />
             </div>
           ))}
       </div>
+      {showMovetoTop && (
+        <i
+          className="fas fa-arrow-up fixed bottom-9 right-12 text-xl bg-yellow-400 px-[19px] py-3 rounded-full cursor-pointer"
+          onClick={() =>
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            })
+          }
+        />
+      )}
     </div>
   );
 }

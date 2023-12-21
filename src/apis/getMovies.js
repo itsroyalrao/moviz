@@ -14,15 +14,28 @@ async function getMovies(pageNumber) {
         const response = await getMovieDetails(movie.id);
         if (response.data.poster_path) {
           const imageUrl = `${imageUrlBase}${response.data.poster_path}`;
-          return imageUrl;
+          return {
+            imageUrl,
+            duration: response.data.runtime,
+            releaseDate: response.data.release_date,
+          };
         } else
-          return "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
+          return {
+            imageUrl:
+              "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg",
+            duration: response.data.runtime,
+            releaseDate: response.data.release_date,
+          };
       });
 
       const imageUrls = await Promise.all(imageUrlPromises);
 
+      console.log("imageUrls", imageUrls);
+
       movies.forEach((movie, index) => {
-        movie.imageUrl = imageUrls[index];
+        movie.imageUrl = imageUrls[index].imageUrl;
+        movie.duration = imageUrls[index].duration;
+        movie.releaseDate = imageUrls[index].releaseDate;
       });
 
       return movies;
