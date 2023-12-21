@@ -3,11 +3,13 @@ import { getMovies } from "../apis/getMovies";
 import Card from "../components/Card";
 import Navbar from "../components/Navbar";
 import { handleInfiniteScroll } from "../helper/handleInfiniteScroll";
+import { handleScreenWidth } from "../helper/handleScreenWidth";
 
 function Home() {
   const [movies, setMovies] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [showMovetoTop, setShowMovetoTop] = useState(false);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     (async () => {
@@ -19,6 +21,8 @@ function Home() {
   }, [pageNumber]);
 
   useEffect(() => {
+    handleScreenWidth(setScreenWidth);
+
     window.addEventListener("scroll", () => {
       handleInfiniteScroll(setPageNumber);
       document.documentElement.scrollTop > 2000
@@ -48,7 +52,9 @@ function Home() {
       </div>
       {showMovetoTop && (
         <i
-          className="fas fa-arrow-up fixed bottom-9 right-12 text-xl bg-yellow-400 px-[19px] py-3 rounded-full cursor-pointer"
+          className={`fas fa-arrow-up fixed ${
+            screenWidth > 640 ? "bottom-9 right-12" : "bottom-5 right-4"
+          } text-xl bg-yellow-400 px-[19px] py-3 rounded-full cursor-pointer`}
           onClick={() =>
             window.scrollTo({
               top: 0,
