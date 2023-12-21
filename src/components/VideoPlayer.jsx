@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 import YouTube from "react-youtube";
 
-const VideoPlayer = ({ height, width, screenWidth }) => {
-  const videoId = "vCcGYxy6PNA";
+const VideoPlayer = ({ videoId, height, width }) => {
+  // const videoId = "vCcGYxy6PNA";
 
   const onReady = (event) => {
     event.target.playVideo();
@@ -11,13 +11,13 @@ const VideoPlayer = ({ height, width, screenWidth }) => {
   return (
     <div>
       <YouTube
-        videoId={videoId}
+        videoId={videoId.toString()}
         opts={{
-          height: screenWidth > 720 ? "390" : height,
-          width: screenWidth > 720 ? "640" : width,
+          height,
+          width,
           playerVars: {
             // https://developers.google.com/youtube/player_parameters
-            autoplay: 1,
+            autoplay: 0,
           },
         }}
         onReady={onReady}
@@ -30,7 +30,6 @@ VideoPlayer.propTypes = {
   height: PropTypes.string,
   width: PropTypes.string,
   videoId: PropTypes.string,
-  screenWidth: PropTypes.number,
 };
 
 export default VideoPlayer;

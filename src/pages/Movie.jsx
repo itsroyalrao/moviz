@@ -4,20 +4,25 @@ import { fetchMovieVideos, getMovieDetails } from "../apis/getMovies";
 import Navbar from "../components/Navbar";
 import { handleScreenWidth } from "../helper/handleScreenWidth";
 import VideoPlayer from "../components/VideoPlayer";
+import VideoCard from "../components/VideoCard";
 
 function Movie() {
   const { id } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
+  const [videos, setVideos] = useState(null);
 
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     (async () => {
       setMovieDetails((await getMovieDetails(id)).data);
-      fetchMovieVideos(id);
+      setVideos(await fetchMovieVideos(id));
     })();
   }, [id]);
 
+  if (videos) {
+    console.log(videos, 12121);
+  }
   useEffect(() => {
     handleScreenWidth(setScreenWidth);
   }, []);
@@ -65,13 +70,19 @@ function Movie() {
               </div>
             </div>
           </div>
-          <div className="w-full flex justify-center pb-20">
-            <VideoPlayer
-              videoId={id}
-              height="240"
-              width="320"
-              screenWidth={screenWidth}
-            />
+
+          <div className="grid lg:grid-cols-4 gap-2">
+            {videos &&
+              videos.map((video) => (
+                <div key={Math.random()}>
+                  <VideoPlayer
+                    videoId={video.key}
+                    height="240"
+                    width="320"
+                    screenWidth={screenWidth}
+                  />
+                </div>
+              ))}
           </div>
         </div>
       )}

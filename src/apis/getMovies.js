@@ -30,8 +30,6 @@ async function getMovies(pageNumber) {
 
       const imageUrls = await Promise.all(imageUrlPromises);
 
-      console.log("imageUrls", imageUrls);
-
       movies.forEach((movie, index) => {
         movie.imageUrl = imageUrls[index].imageUrl;
         movie.duration = imageUrls[index].duration;
@@ -61,8 +59,7 @@ const fetchMovieVideos = async (movieId) => {
     `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`
   );
   const data = await response.json();
-  console.log(movieId, data);
-  // return data.results; // Returns an array of videos for the movie
+  return data.results;
 };
 
 export { getMovies, getMovieDetails, fetchMovieVideos };
