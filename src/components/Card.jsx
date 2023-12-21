@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 
 function Card({ id, imageUrl, title, overview }) {
   return (
-    <div className="overflow-hidden">
+    <div className={`cursor-pointer overflow-hidden`} title={title}>
       <img src={imageUrl} alt={title} className="" />
       <div className="p-2 truncate">{title}</div>
       {/* <div>Movie Id : {id} </div> */}

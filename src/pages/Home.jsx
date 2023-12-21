@@ -29,7 +29,7 @@ function Home() {
             </div>
           ))}
       </div>
-      <div className="pt-5 pb-20">
+      <div className="pt-5 pb-12">
         <Pagination
           pageNumber={pageNumber}
           setPageNumber={setPageNumber}
