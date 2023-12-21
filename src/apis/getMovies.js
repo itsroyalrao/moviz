@@ -2,12 +2,12 @@ import axios from "axios";
 
 const apiKey = "74381893d3f7c586985415383c54bbf4";
 
-async function getMovies(setMovies, pageNumber, setTotalPage) {
+async function getMovies(pageNumber) {
   const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
   try {
     const response = await axios.get(apiUrl);
-    console.log(response);
     const movies = response.data.results;
+
     if (movies) {
       const imageUrlPromises = movies.map(async (movie) => {
         return await getImageUrl(movie.id);
@@ -19,8 +19,7 @@ async function getMovies(setMovies, pageNumber, setTotalPage) {
         movie.imageUrl = imageUrls[index];
       });
 
-      setMovies(movies);
-      setTotalPage(response.data.total_pages);
+      return movies;
     }
   } catch (e) {
     console.log(e);

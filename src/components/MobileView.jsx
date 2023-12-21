@@ -5,7 +5,7 @@ function MobileView() {
 
   return (
     <div className="flex flex-col">
-      <div className="bg-yellow-300 px-4 py-2 flex justify-between items-center text-black text-2xl">
+      <div className="bg-yellow-300 px-4 py-2 flex justify-between items-center text-black text-2xl sticky top-0">
         <div className="font-bold">Moviez</div>
         <i
           className={`fas fa-bars ${
