@@ -4,7 +4,7 @@ function MobileView() {
   const [clicked, setClicked] = useState(false);
 
   return (
-    <div>
+    <div className="flex flex-col">
       <div className="bg-yellow-300 px-4 py-2 flex justify-between items-center text-black text-2xl">
         <div className="font-bold">Moviez</div>
         <i
@@ -43,17 +43,17 @@ function MobileView() {
                 <div className="text-xl">Top Rated</div>
               </div>
             </div>
-            <div className="w-full flex items-center gap-2">
-              <input
-                type="text"
-                className="w-full px-6 py-2 text-black rounded-full"
-                placeholder="Search"
-              />
-              <i className="fas fa-search text-2xl text-black bg-yellow-400 px-2 py-1 rounded-full cursor-pointer"></i>
-            </div>
           </div>
         </>
       )}
+      <div className="w-full flex items-center gap-2 p-2">
+        <input
+          type="text"
+          className="w-full px-6 py-2 text-black rounded-full"
+          placeholder="Search..."
+        />
+        <i className="fas fa-search text-2xl text-black bg-yellow-400 px-2 py-1 rounded-full cursor-pointer"></i>
+      </div>
     </div>
   );
 }
