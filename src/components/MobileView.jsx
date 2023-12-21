@@ -55,13 +55,13 @@ function MobileView() {
           </div>
         </>
       )}
-      <div className="w-full flex items-center gap-2 p-2">
+      <div className="w-full flex items-center p-1">
         <input
           type="text"
-          className="w-full px-6 py-2 text-black rounded-full"
+          className="w-full px-3 py-1 text-black rounded-s focus:outline-none"
           placeholder="Search..."
         />
-        <i className="fas fa-search text-2xl text-black bg-yellow-400 px-2 py-1 rounded-full cursor-pointer"></i>
+        <i className="fas fa-search text-2xl text-black bg-yellow-400 px-2 rounded-e cursor-pointer"></i>
       </div>
       {showMovetoTop && (
         <i

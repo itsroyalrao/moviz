@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const apiKey = "74381893d3f7c586985415383c54bbf4";
+const imageUrlBase = "https://image.tmdb.org/t/p/w500";
 
 async function getMovies(pageNumber) {
   const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
@@ -10,8 +11,12 @@ async function getMovies(pageNumber) {
 
     if (movies) {
       const imageUrlPromises = movies.map(async (movie) => {
-        await fetchMovieVideos(movie.id);
-        return await getImageUrl(movie.id);
+        const response = await getMovieDetails(movie.id);
+        if (response.data.poster_path) {
+          const imageUrl = `${imageUrlBase}${response.data.poster_path}`;
+          return imageUrl;
+        } else
+          return "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg";
       });
 
       const imageUrls = await Promise.all(imageUrlPromises);
@@ -27,22 +32,12 @@ async function getMovies(pageNumber) {
   }
 }
 
-const getImageUrl = async (movieId) => {
+const getMovieDetails = async (movieId) => {
   try {
-    const imageUrlBase = "https://image.tmdb.org/t/p/w500";
     const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`;
 
     const response = await axios.get(apiUrl);
-    if (response) {
-      const movieData = response.data;
-
-      if (movieData.poster_path) {
-        const posterUrl = `${imageUrlBase}${movieData.poster_path}`;
-        return posterUrl;
-      } else {
-        console.log("No poster available for this movie");
-      }
-    }
+    return response;
   } catch (e) {
     console.log(e);
   }
@@ -57,4 +52,4 @@ const fetchMovieVideos = async (movieId) => {
   // return data.results; // Returns an array of videos for the movie
 };
 
-export { getMovies };
+export { getMovies, getMovieDetails, fetchMovieVideos };

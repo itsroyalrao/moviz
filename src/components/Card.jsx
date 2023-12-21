@@ -1,14 +1,17 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function Card({ id, imageUrl, title, overview, voteAverage }) {
   return (
-    <div className="cursor-pointer overflow-hidden" title={title}>
+    <Link to={`/movie/${id}`} className="" title={title}>
       <img src={imageUrl} alt={title} className="" />
-      <div className="p-2 truncate">{title}</div>
-      <div>IMDB - {voteAverage}</div>
-      {/* <div>Movie Id : {id} </div> */}
+      <div className="p-2 pt-1">
+        <div className="truncate">{title}</div>
+        <div>IMDB - {voteAverage}</div>
+        {/* <div>Movie Id : {id} </div> */}
+      </div>
       {/* <div>Movie Overview : {overview} </div> */}
-    </div>
+    </Link>
   );
 }
 
