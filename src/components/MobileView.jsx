@@ -1,46 +1,98 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 function MobileView() {
-  const [clicked, setClicked] = useState(false);
+  const [showItems, setShowItems] = useState(false);
+  const [clicked, setClicked] = useState("home");
 
   return (
     <div className="flex flex-col">
-      <div className="bg-yellow-400 px-4 py-2 flex justify-between items-center text-black text-2xl sticky top-0">
-        <div className="font-bold">Moviez</div>
+      <div className="flex justify-between items-center px-4 py-3 bg-[#121212] text-2xl sticky top-0">
+        <Link to={"/"} className="font-bold text-yellow-400">
+          Moviez
+        </Link>
         <i
-          className={`fas fa-bars ${
-            clicked && "transform transition-transform rotate-90"
+          className={`fas fa-bars text-yellow-400 ${
+            showItems && "transform transition-transform rotate-90"
           }`}
-          onClick={() => setClicked(!clicked)}
+          onClick={() => setShowItems(!showItems)}
         ></i>
       </div>
-      {clicked && (
+      {showItems && (
         <>
           <div className="px-4 py-2 flex flex-col gap-5">
             <div className="grid grid-cols-2 gap-5">
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-user"></i>
-                <div className="text-xl">Profile</div>
+                <Link
+                  to={"#"}
+                  className={`text-xl ${
+                    clicked === "profile" ? "text-yellow-400" : ""
+                  }`}
+                  onClick={() => setClicked("profile")}
+                >
+                  Profile
+                </Link>
               </div>
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-home"></i>
-                <div className="text-xl">Home</div>
+                <Link
+                  to={"/"}
+                  className={`text-xl ${
+                    clicked === "home" ? "text-yellow-400" : ""
+                  }`}
+                  onClick={() => setClicked("home")}
+                >
+                  Home
+                </Link>
               </div>
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-film"></i>
-                <div className="text-xl">Movies</div>
+                <Link
+                  to={"#"}
+                  className={`text-xl ${
+                    clicked === "movies" ? "text-yellow-400" : ""
+                  }`}
+                  onClick={() => setClicked("movies")}
+                >
+                  Movies
+                </Link>
               </div>
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-tv"></i>
-                <div className="text-xl">Tv Shows</div>
+                <Link
+                  to={"#"}
+                  className={`text-xl ${
+                    clicked === "tv_shows" ? "text-yellow-400" : ""
+                  }`}
+                  onClick={() => setClicked("tv_shows")}
+                >
+                  Tv Shows
+                </Link>
               </div>
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-bars-staggered"></i>
-                <div className="text-xl">Genre</div>
+                <Link
+                  to={"#"}
+                  className={`text-xl ${
+                    clicked === "genre" ? "text-yellow-400" : ""
+                  }`}
+                  onClick={() => setClicked("genre")}
+                >
+                  Genre
+                </Link>
               </div>
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-bolt"></i>
-                <div className="text-xl">Top Rated</div>
+                <Link
+                  to={"#"}
+                  className={`text-xl ${
+                    clicked === "top_rated" ? "text-yellow-400" : ""
+                  }`}
+                  onClick={() => setClicked("top_rated")}
+                >
+                  Top Rated
+                </Link>
               </div>
             </div>
           </div>

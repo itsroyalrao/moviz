@@ -1,17 +1,62 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+
 function LaptopView() {
+  const [clicked, setClicked] = useState("home");
+
   return (
-    <div className="bg-yellow-400 px-12 py-2 flex justify-between items-center text-black">
-      <div className="font-bold text-3xl pb-1">Moviez</div>
-      <div className="flex gap-7">
-        <div className="font-bold text-xl cursor-pointer">Home</div>
-        <div className="font-bold text-xl cursor-pointer">Movies</div>
-        <div className="font-bold text-xl cursor-pointer">Tv Shows</div>
-        <div className="font-bold text-xl cursor-pointer">Genre</div>
-        <div className="font-bold text-xl cursor-pointer">Top Rated</div>
+    <div className="px-12 py-3 flex justify-between items-center ">
+      <Link to={"/"} className="font-bold text-3xl text-yellow-400">
+        Moviez
+      </Link>
+      <div className="flex items-center gap-7 text-xl">
+        <Link
+          to={"/"}
+          className={`font-bold ${clicked === "home" ? "text-yellow-400" : ""}`}
+          onClick={() => setClicked("home")}
+        >
+          Home
+        </Link>
+        <Link
+          to={"#"}
+          className={`font-bold ${
+            clicked === "movies" ? "text-yellow-400" : ""
+          }`}
+          onClick={() => setClicked("movies")}
+        >
+          Movies
+        </Link>
+        <Link
+          to={"#"}
+          className={`font-bold ${
+            clicked === "tv_shows" ? "text-yellow-400" : ""
+          }`}
+          onClick={() => setClicked("tv_shows")}
+        >
+          Tv Shows
+        </Link>
+        <Link
+          to={"#"}
+          className={`font-bold ${
+            clicked === "genre" ? "text-yellow-400" : ""
+          }`}
+          onClick={() => setClicked("genre")}
+        >
+          Genre
+        </Link>
+        <Link
+          to={"#"}
+          className={`font-bold ${
+            clicked === "top_rated" ? "text-yellow-400" : ""
+          }`}
+          onClick={() => setClicked("top_rated")}
+        >
+          Top Rated
+        </Link>
       </div>
       <div className="flex items-center gap-4">
-        <i className="fas fa-search text-2xl cursor-pointer"></i>
-        <i className="fas fa-user-circle text-4xl cursor-pointer"></i>
+        <i className="fas fa-search text-2xl"></i>
+        <i className="fas fa-user-circle text-4xl text-yellow-400"></i>
       </div>
     </div>
   );
