@@ -30,8 +30,7 @@ async function getMovies(pageNumber, section, genreId = null) {
           };
         } else
           return {
-            imageUrl:
-              "https://www.prokerala.com/movies/assets/img/no-poster-available.jpg",
+            imageUrl: "images/PosterNotAvailable.jpg",
             duration: response.data.runtime,
             releaseDate: response.data.release_date,
           };

@@ -5,16 +5,19 @@ import DisplayGenre from "./DisplayGenre";
 
 function LaptopView({ active }) {
   const [displayGenre, setDisplayGenre] = useState(false);
+  const [showInput, setShowInput] = useState(false);
 
   return (
-    <div className="px-12 py-3 flex justify-between items-center ">
+    <div className="px-9 py-3 flex justify-between items-center ">
       <Link to={"/"} className="font-bold text-3xl text-yellow-400">
         Moviez
       </Link>
       <div className="flex items-center gap-7 text-xl">
         <Link
           to={"/"}
-          className={`font-bold ${active === "home" ? "text-yellow-400" : ""}`}
+          className={`font-bold hover:text-yellow-400 ${
+            active === "home" ? "text-yellow-400" : ""
+          }`}
         >
           Home
         </Link>
@@ -24,7 +27,7 @@ function LaptopView({ active }) {
         >
           <Link
             to={"#"}
-            className={`font-bold  ${
+            className={`font-bold hover:text-yellow-400 ${
               active === "genre" ? "text-yellow-400" : ""
             }`}
           >
@@ -38,7 +41,7 @@ function LaptopView({ active }) {
         </div>
         <Link
           to={"#"}
-          className={`font-bold ${
+          className={`font-bold hover:text-yellow-400 ${
             active === "movies" ? "text-yellow-400" : ""
           }`}
         >
@@ -46,7 +49,7 @@ function LaptopView({ active }) {
         </Link>
         <Link
           to={"#"}
-          className={`font-bold ${
+          className={`font-bold hover:text-yellow-400 ${
             active === "tv_shows" ? "text-yellow-400" : ""
           }`}
         >
@@ -54,7 +57,7 @@ function LaptopView({ active }) {
         </Link>
         <Link
           to={"/top"}
-          className={`font-bold ${
+          className={`font-bold hover:text-yellow-400 ${
             active === "top_rated" ? "text-yellow-400" : ""
           }`}
         >
@@ -62,8 +65,43 @@ function LaptopView({ active }) {
         </Link>
       </div>
       <div className="flex items-center gap-4">
-        <i className="fas fa-search text-2xl"></i>
-        <i className="fas fa-user-circle text-4xl text-yellow-400"></i>
+        <div className="flex items-center">
+          {showInput && (
+            <input
+              type="text"
+              className={`w-40 px-5 py-[6px] text-black rounded-s-full focus:outline-none`}
+              placeholder="Search..."
+              autoFocus
+            />
+          )}
+          <i
+            className={`fas fa-search text-2xl cursor-pointer text-black bg-yellow-400 px-[6px] py-[2px] ${
+              showInput ? "rounded-e-full" : "rounded-full"
+            }`}
+            onClick={() => setShowInput((prevShowInput) => !prevShowInput)}
+          ></i>
+        </div>
+        {/* <div className="flex items-center">
+          <input
+            type="text"
+            className={`w-[0px] px-5 py-[6px] text-black rounded-s-full focus:outline-none transition-all duration-500`}
+            placeholder="Search..."
+            style={{
+              width: showInput ? "160px" : "0px",
+              opacity: showInput ? 1 : 0,
+              marginLeft: showInput ? "5px" : "0px",
+            }}
+          />
+          <i
+            className={`fas fa-search text-2xl cursor-pointer px-[6px] py-[2px] ${
+              showInput
+                ? "rounded-e-full text-black bg-yellow-400"
+                : "hover:text-yellow-400"
+            }`}
+            onClick={() => setShowInput((prevShowInput) => !prevShowInput)}
+          ></i>
+        </div> */}
+        <Link className="fas fa-user-circle text-4xl text-yellow-400"></Link>
       </div>
     </div>
   );
