@@ -45,7 +45,7 @@ function LaptopView() {
           Genre
         </Link>
         <Link
-          to={"#"}
+          to={"/top"}
           className={`font-bold ${
             clicked === "top_rated" ? "text-yellow-400" : ""
           }`}

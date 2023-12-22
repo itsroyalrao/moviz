@@ -85,7 +85,7 @@ function MobileView() {
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-bolt"></i>
                 <Link
-                  to={"#"}
+                  to={"/top"}
                   className={`text-xl ${
                     clicked === "top_rated" ? "text-yellow-400" : ""
                   }`}

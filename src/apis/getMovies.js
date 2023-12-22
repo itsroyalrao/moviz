@@ -3,8 +3,14 @@ import axios from "axios";
 const apiKey = "74381893d3f7c586985415383c54bbf4";
 const imageUrlBase = "https://image.tmdb.org/t/p/w500";
 
-async function getMovies(pageNumber) {
-  const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
+async function getMovies(pageNumber, section) {
+  let apiUrl;
+  if (section === "home") {
+    apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
+  } else if (section === "top_rated") {
+    apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=vote_average.desc&page=${pageNumber}`;
+  }
+
   try {
     const response = await axios.get(apiUrl);
     const movies = response.data.results;
@@ -12,6 +18,7 @@ async function getMovies(pageNumber) {
     if (movies) {
       const imageUrlPromises = movies.map(async (movie) => {
         const response = await getMovieDetails(movie.id);
+        // console.log(response, Math.random());
         if (response.data.poster_path) {
           const imageUrl = `${imageUrlBase}${response.data.poster_path}`;
           return {

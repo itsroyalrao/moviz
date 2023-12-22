@@ -5,7 +5,7 @@ import Navbar from "../components/Navbar";
 import { handleInfiniteScroll } from "../helper/handleInfiniteScroll";
 import { handleScreenWidth } from "../helper/handleScreenWidth";
 
-function Home() {
+function TopRated() {
   const [movies, setMovies] = useState(null);
   const [nextMovies, setNextMovies] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -15,14 +15,14 @@ function Home() {
   useEffect(() => {
     (async () => {
       if (!movies) {
-        const moviesData = await getMovies(pageNumber, "home");
+        const moviesData = await getMovies(pageNumber, "top_rated");
         console.log(moviesData);
         setMovies(moviesData);
-        const nextMoviesData = await getMovies(pageNumber + 1, "home");
+        const nextMoviesData = await getMovies(pageNumber + 1, "top_rated");
         setNextMovies(nextMoviesData);
       } else {
         setMovies((prevMovies) => [...prevMovies, ...nextMovies]);
-        const nextMoviesData = await getMovies(pageNumber + 1, "home");
+        const nextMoviesData = await getMovies(pageNumber + 1, "top_rated");
         setNextMovies(nextMoviesData);
       }
     })();
@@ -75,4 +75,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default TopRated;
