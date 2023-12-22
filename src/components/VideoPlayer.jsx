@@ -18,6 +18,7 @@ const VideoPlayer = ({ videoId, height, width }) => {
           playerVars: {
             // https://developers.google.com/youtube/player_parameters
             autoplay: 0,
+            mute: 1,
           },
         }}
         onReady={onReady}

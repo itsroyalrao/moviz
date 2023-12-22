@@ -7,19 +7,23 @@ import { handleScreenWidth } from "../helper/handleScreenWidth";
 
 function Home() {
   const [movies, setMovies] = useState(null);
+  const [nextMovies, setNextMovies] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [showMovetoTop, setShowMovetoTop] = useState(false);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     (async () => {
-      const moviesData = await getMovies(pageNumber);
-      const nextMovies = await getMovies(pageNumber + 1);
-      setMovies((prevMovies) =>
-        prevMovies
-          ? [...prevMovies, ...moviesData, ...nextMovies]
-          : [...moviesData, ...nextMovies]
-      );
+      if (!movies) {
+        const moviesData = await getMovies(pageNumber);
+        setMovies(moviesData);
+        const nextMoviesData = await getMovies(pageNumber + 1);
+        setNextMovies(nextMoviesData);
+      } else {
+        setMovies((prevMovies) => [...prevMovies, ...nextMovies]);
+        const nextMoviesData = await getMovies(pageNumber + 1);
+        setNextMovies(nextMoviesData);
+      }
     })();
   }, [pageNumber]);
 
