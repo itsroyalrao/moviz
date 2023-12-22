@@ -4,7 +4,7 @@ import { fetchMovieVideos, getMovieDetails } from "../apis/getMovies";
 import Navbar from "../components/Navbar";
 import { handleScreenWidth } from "../helper/handleScreenWidth";
 import MovieDetails from "../components/MovieDetails";
-import VideoPlayer from "../components/VideoPlayer";
+// import VideoPlayer from "../components/VideoPlayer";
 
 function Movie() {
   const { id } = useParams();
@@ -30,7 +30,7 @@ function Movie() {
     <div className="flex flex-col">
       <Navbar />
 
-      <div className="">
+      <div className="pt-3">
         {videos && (
           // <VideoPlayer
           //   videoId={
