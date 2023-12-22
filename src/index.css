@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 body {
-  user-select: none;
-  background-color: #121212;
+  /* user-select: none; */
+  background-color: hsl(0, 0%, 7%);
   color: #ffffff;
 }
 

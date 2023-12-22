@@ -13,7 +13,7 @@ function LaptopView({ active }) {
   return (
     <div className="px-9 py-3 flex justify-between items-center ">
       <Link to={"/"} className="font-bold text-3xl text-yellow-400">
-        Moviez
+        Moviiz
       </Link>
       <div className="flex items-center gap-7 text-xl">
         <Link

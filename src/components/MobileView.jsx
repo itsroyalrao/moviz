@@ -12,7 +12,7 @@ function MobileView({ active }) {
     <div className="flex flex-col">
       <div className="flex justify-between items-center px-4 py-3 bg-[#121212] text-2xl sticky top-0">
         <Link to={"/"} className="font-bold text-yellow-400">
-          Moviez
+          Moviiz
         </Link>
         <i
           className={`fas fa-bars text-yellow-400 cursor-pointer ${
