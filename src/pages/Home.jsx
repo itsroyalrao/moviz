@@ -13,9 +13,12 @@ function Home() {
 
   useEffect(() => {
     (async () => {
-      const movies = await getMovies(pageNumber);
+      const moviesData = await getMovies(pageNumber);
+      const nextMovies = await getMovies(pageNumber + 1);
       setMovies((prevMovies) =>
-        prevMovies ? [...prevMovies, ...movies] : movies
+        prevMovies
+          ? [...prevMovies, ...moviesData, ...nextMovies]
+          : [...moviesData, ...nextMovies]
       );
     })();
   }, [pageNumber]);
@@ -29,7 +32,7 @@ function Home() {
         ? setShowMovetoTop(true)
         : setShowMovetoTop(false);
     });
-  }, []);
+  }, [screenWidth]);
 
   return (
     <div className="h-[100svh] flex flex-col">
