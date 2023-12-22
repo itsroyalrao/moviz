@@ -4,6 +4,7 @@ import { fetchMovieVideos, getMovieDetails } from "../apis/getMovies";
 import Navbar from "../components/Navbar";
 import { handleScreenWidth } from "../helper/handleScreenWidth";
 import MovieDetails from "../components/MovieDetails";
+import VideoPlayer from "../components/VideoPlayer";
 
 function Movie() {
   const { id } = useParams();
@@ -31,8 +32,12 @@ function Movie() {
 
       <div className="pt-3">
         {videos && (
-          <iframe
-            title="video-player"
+          <VideoPlayer
+            videoId={
+              videos.length
+                ? videos.find((movie) => movie.type === "Trailer").key
+                : ""
+            }
             height={
               screenWidth > 1024
                 ? "512"
@@ -43,14 +48,28 @@ function Movie() {
                 : "240"
             }
             width="100%"
-            src={`https://www.youtube.com/embed/${
-              videos.length
-                ? videos.find((movie) => movie.type === "Trailer").key
-                : ""
-            }`}
-            frameBorder="0"
-            allowFullScreen
           />
+
+          // <iframe
+          //   title="video-player"
+          //   height={
+          //     screenWidth > 1024
+          //       ? "512"
+          //       : screenWidth > 768
+          //       ? "384"
+          //       : screenWidth > 640
+          //       ? "320"
+          //       : "240"
+          //   }
+          //   width="100%"
+          //   src={`https://www.youtube.com/embed/${
+          //     videos.length
+          //       ? videos.find((movie) => movie.type === "Trailer").key
+          //       : ""
+          //   }`}
+          //   frameBorder="0"
+          //   allowFullScreen
+          // />
         )}
       </div>
 

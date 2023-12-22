@@ -29,6 +29,16 @@ function DisplayMovies({ active, query }) {
   }, [pageNumber]);
 
   useEffect(() => {
+    setMovies(null);
+    (async () => {
+      const moviesData = await getMovies(pageNumber, active, query);
+      setMovies(moviesData);
+      const nextMoviesData = await getMovies(pageNumber + 1, active, query);
+      setNextMovies(nextMoviesData);
+    })();
+  }, [query]);
+
+  useEffect(() => {
     handleScreenWidth(setScreenWidth);
 
     window.addEventListener("scroll", () => {
@@ -38,16 +48,6 @@ function DisplayMovies({ active, query }) {
         : setShowMovetoTop(false);
     });
   }, [screenWidth]);
-
-  useEffect(() => {
-    setMovies(null);
-    (async () => {
-      const moviesData = await getMovies(pageNumber, active, query);
-      setMovies(moviesData);
-      const nextMoviesData = await getMovies(pageNumber + 1, active, query);
-      setNextMovies(nextMoviesData);
-    })();
-  }, [query]);
   return (
     <div className="h-[100svh] flex flex-col">
       <Navbar active={active} />
