@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 function MobileView({ active }) {
   const [showItems, setShowItems] = useState(false);
+  const [query, setQuery] = useState("");
 
   return (
     <div className="flex flex-col">
@@ -105,8 +106,13 @@ function MobileView({ active }) {
           type="text"
           className="w-full px-3 py-[6px] text-black rounded-s focus:outline-none"
           placeholder="Search..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
         />
-        <i className="fas fa-search text-2xl text-black bg-yellow-400 px-2 py-[2px] rounded-e cursor-pointer"></i>
+        <Link
+          to={`/search/${query}`}
+          className="fas fa-search text-2xl text-black bg-yellow-400 px-2 py-[2px] rounded-e cursor-pointer"
+        ></Link>
       </div>
     </div>
   );
