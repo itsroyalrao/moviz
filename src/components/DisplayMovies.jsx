@@ -6,7 +6,7 @@ import Navbar from "./Navbar";
 import { handleInfiniteScroll } from "../helper/handleInfiniteScroll";
 import { handleScreenWidth } from "../helper/handleScreenWidth";
 
-function DisplayMovies({ active }) {
+function DisplayMovies({ active, query }) {
   const [movies, setMovies] = useState(null);
   const [nextMovies, setNextMovies] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -16,14 +16,13 @@ function DisplayMovies({ active }) {
   useEffect(() => {
     (async () => {
       if (!movies) {
-        const moviesData = await getMovies(pageNumber, active);
-        console.log(moviesData);
+        const moviesData = await getMovies(pageNumber, active, query);
         setMovies(moviesData);
-        const nextMoviesData = await getMovies(pageNumber + 1, active);
+        const nextMoviesData = await getMovies(pageNumber + 1, active, query);
         setNextMovies(nextMoviesData);
       } else {
         setMovies((prevMovies) => [...prevMovies, ...nextMovies]);
-        const nextMoviesData = await getMovies(pageNumber + 1, active);
+        const nextMoviesData = await getMovies(pageNumber + 1, active, query);
         setNextMovies(nextMoviesData);
       }
     })();
@@ -40,6 +39,15 @@ function DisplayMovies({ active }) {
     });
   }, [screenWidth]);
 
+  useEffect(() => {
+    setMovies(null);
+    (async () => {
+      const moviesData = await getMovies(pageNumber, active, query);
+      setMovies(moviesData);
+      const nextMoviesData = await getMovies(pageNumber + 1, active, query);
+      setNextMovies(nextMoviesData);
+    })();
+  }, [query]);
   return (
     <div className="h-[100svh] flex flex-col">
       <Navbar active={active} />
@@ -78,6 +86,7 @@ function DisplayMovies({ active }) {
 
 DisplayMovies.propTypes = {
   active: PropTypes.string,
+  query: PropTypes.string,
 };
 
 export default DisplayMovies;

@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 function Card({ id, imageUrl, title, voteAverage, duration, releaseDate }) {
   const [year] = releaseDate.split("-");
   return (
-    <Link to={`/movie/${id}`} className="" title={title}>
-      <img src={imageUrl} alt={title} className="" />
+    <Link to={`/movie/${id}`} className="flex flex-col" title={title}>
+      <img src={imageUrl} alt={title} className="grow" />
       <div className="p-2 pt-1">
         <div className="truncate">{title}</div>
         <div className="flex justify-between text-gray-300 text-sm">

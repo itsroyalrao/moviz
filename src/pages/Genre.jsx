@@ -86,7 +86,7 @@ function Genre({ active }) {
 
   return (
     <>
-      <DisplayMovies active={active} />
+      <DisplayMovies active={active} query={null} />
     </>
   );
 }

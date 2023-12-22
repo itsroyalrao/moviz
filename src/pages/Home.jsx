@@ -4,7 +4,7 @@ import DisplayMovies from "../components/DisplayMovies";
 function Home({ active }) {
   return (
     <>
-      <DisplayMovies active={active} />
+      <DisplayMovies active={active} query={null} />
     </>
   );
 }

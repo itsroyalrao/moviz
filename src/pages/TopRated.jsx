@@ -4,7 +4,7 @@ import DisplayMovies from "../components/DisplayMovies";
 function TopRated({ active }) {
   return (
     <>
-      <DisplayMovies active={active} />
+      <DisplayMovies active={active} query={null} />
     </>
   );
 }

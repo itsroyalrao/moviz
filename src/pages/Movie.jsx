@@ -4,7 +4,6 @@ import { fetchMovieVideos, getMovieDetails } from "../apis/getMovies";
 import Navbar from "../components/Navbar";
 import { handleScreenWidth } from "../helper/handleScreenWidth";
 import MovieDetails from "../components/MovieDetails";
-// import VideoPlayer from "../components/VideoPlayer";
 
 function Movie() {
   const { id } = useParams();
@@ -63,18 +62,3 @@ function Movie() {
 }
 
 export default Movie;
-
-// <VideoPlayer
-//   videoId={videos.find((movie) => movie.type === "Trailer").key}
-//   height={
-//     screenWidth > 1024
-//       ? "512"
-//       : screenWidth > 768
-//       ? "384"
-//       : screenWidth > 640
-//       ? "320"
-//       : "240"
-//   }
-//   width="100%"
-//   screenWidth={screenWidth}
-// />

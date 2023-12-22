@@ -12,7 +12,7 @@ function MobileView({ active }) {
           Moviez
         </Link>
         <i
-          className={`fas fa-bars text-yellow-400 ${
+          className={`fas fa-bars text-yellow-400 cursor-pointer ${
             showItems && "transform transition-transform rotate-90"
           }`}
           onClick={() => setShowItems(!showItems)}

@@ -3,7 +3,7 @@ import axios from "axios";
 const apiKey = "74381893d3f7c586985415383c54bbf4";
 const imageUrlBase = "https://image.tmdb.org/t/p/w500";
 
-async function getMovies(pageNumber, section, genreId = null) {
+async function getMovies(pageNumber, section, query, genreId = null) {
   let apiUrl;
   if (section === "home") {
     apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
@@ -11,6 +11,8 @@ async function getMovies(pageNumber, section, genreId = null) {
     apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=vote_average.desc&page=${pageNumber}`;
   } else if (section === "genre") {
     apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&with_genres=${genreId}&page=${pageNumber}`;
+  } else if (section === "search") {
+    apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=${pageNumber}`;
   }
 
   try {
@@ -20,7 +22,7 @@ async function getMovies(pageNumber, section, genreId = null) {
     if (movies) {
       const imageUrlPromises = movies.map(async (movie) => {
         const response = await getMovieDetails(movie.id);
-        // console.log(response, Math.random());
+
         if (response.data.poster_path) {
           const imageUrl = `${imageUrlBase}${response.data.poster_path}`;
           return {

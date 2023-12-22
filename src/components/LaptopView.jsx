@@ -6,6 +6,7 @@ import DisplayGenre from "./DisplayGenre";
 function LaptopView({ active }) {
   const [displayGenre, setDisplayGenre] = useState(false);
   const [showInput, setShowInput] = useState(false);
+  const [query, setQuery] = useState("");
 
   return (
     <div className="px-9 py-3 flex justify-between items-center ">
@@ -72,14 +73,19 @@ function LaptopView({ active }) {
               className={`w-40 px-5 py-[6px] text-black rounded-s-full focus:outline-none`}
               placeholder="Search..."
               autoFocus
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
             />
           )}
-          <i
+          <Link
+            to={showInput && `/search/${query}`}
             className={`fas fa-search text-2xl cursor-pointer text-black bg-yellow-400 px-[6px] py-[2px] ${
               showInput ? "rounded-e-full" : "rounded-full"
             }`}
-            onClick={() => setShowInput((prevShowInput) => !prevShowInput)}
-          ></i>
+            onClick={() => {
+              setShowInput((prevShowInput) => !prevShowInput);
+            }}
+          ></Link>
         </div>
         {/* <div className="flex items-center">
           <input
