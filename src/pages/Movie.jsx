@@ -4,7 +4,6 @@ import { fetchMovieVideos, getMovieDetails } from "../apis/getMovies";
 import Navbar from "../components/Navbar";
 import { handleScreenWidth } from "../helper/handleScreenWidth";
 import VideoPlayer from "../components/VideoPlayer";
-import VideoCard from "../components/VideoCard";
 
 function Movie() {
   const { id } = useParams();
@@ -29,6 +28,25 @@ function Movie() {
   return (
     <div className="flex flex-col">
       <Navbar />
+
+      <div className="">
+        {videos && (
+          <VideoPlayer
+            videoId={videos[0].key}
+            height={
+              screenWidth > 1024
+                ? "512"
+                : screenWidth > 768
+                ? "384"
+                : screenWidth > 640
+                ? "320"
+                : "240"
+            }
+            width="100%"
+            screenWidth={screenWidth}
+          />
+        )}
+      </div>
 
       {movieDetails && (
         <div className="flex flex-col">
@@ -71,7 +89,7 @@ function Movie() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center gap-3">
+          {/* <div className="flex flex-col items-center gap-3">
             <div className="grid lg:grid-cols-2 gap-2">
               {videos &&
                 videos.map((video) => (
@@ -85,7 +103,7 @@ function Movie() {
                   </div>
                 ))}
             </div>
-          </div>
+          </div> */}
         </div>
       )}
     </div>
