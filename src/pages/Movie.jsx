@@ -71,19 +71,20 @@ function Movie() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center">
-            <div className="grid lg:grid-cols-2 gap-2"></div>
-            {videos &&
-              videos.map((video) => (
-                <div key={Math.random()}>
-                  <VideoPlayer
-                    videoId={video.key}
-                    height={screenWidth > 1020 ? "390" : "240"}
-                    width={screenWidth > 1020 ? "620" : "320"}
-                    screenWidth={screenWidth}
-                  />
-                </div>
-              ))}
+          <div className="flex flex-col items-center gap-3">
+            <div className="grid lg:grid-cols-2 gap-2">
+              {videos &&
+                videos.map((video) => (
+                  <div key={Math.random()}>
+                    <VideoPlayer
+                      videoId={video.key}
+                      height={screenWidth > 1020 ? "390" : "240"}
+                      width={screenWidth > 1020 ? "620" : "320"}
+                      screenWidth={screenWidth}
+                    />
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
       )}
