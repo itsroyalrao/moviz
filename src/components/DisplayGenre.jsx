@@ -1,10 +1,6 @@
-import PropTypes from "prop-types";
-import { useParams } from "react-router-dom";
-import DisplayMovies from "../components/DisplayMovies";
+import { Link } from "react-router-dom";
 
-function Genre({ active }) {
-  const { name } = useParams();
-
+function DisplayGenre() {
   const tmdbGenres = [
     {
       id: 28,
@@ -83,16 +79,20 @@ function Genre({ active }) {
       name: "Western",
     },
   ];
-
   return (
-    <>
-      <DisplayMovies active={active} />
-    </>
+    <div className="flex flex-col justify-center items-center ps-4 py-2 bg-zinc-800">
+      <div className="grid grid-cols-4 gap-4">
+        {tmdbGenres.map((genre) => (
+          <div key={genre.id}>
+            <Link to={`/genre/${genre.name}`} className="hover:text-yellow-400">
+              {" "}
+              {genre.name}{" "}
+            </Link>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
 
-Genre.propTypes = {
-  active: PropTypes.string,
-};
-
-export default Genre;
+export default DisplayGenre;

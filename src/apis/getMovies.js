@@ -3,12 +3,14 @@ import axios from "axios";
 const apiKey = "74381893d3f7c586985415383c54bbf4";
 const imageUrlBase = "https://image.tmdb.org/t/p/w500";
 
-async function getMovies(pageNumber, section) {
+async function getMovies(pageNumber, section, genreId = null) {
   let apiUrl;
   if (section === "home") {
     apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
   } else if (section === "top_rated") {
     apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=vote_average.desc&page=${pageNumber}`;
+  } else if (section === "genre") {
+    apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&with_genres=${genreId}&page=${pageNumber}`;
   }
 
   try {

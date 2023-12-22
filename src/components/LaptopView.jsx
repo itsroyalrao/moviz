@@ -1,8 +1,10 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import DisplayGenre from "./DisplayGenre";
 
-function LaptopView() {
-  const [clicked, setClicked] = useState("home");
+function LaptopView({ active }) {
+  const [displayGenre, setDisplayGenre] = useState(false);
 
   return (
     <div className="px-12 py-3 flex justify-between items-center ">
@@ -12,44 +14,49 @@ function LaptopView() {
       <div className="flex items-center gap-7 text-xl">
         <Link
           to={"/"}
-          className={`font-bold ${clicked === "home" ? "text-yellow-400" : ""}`}
-          onClick={() => setClicked("home")}
+          className={`font-bold ${active === "home" ? "text-yellow-400" : ""}`}
         >
           Home
         </Link>
+        <div
+          onMouseEnter={() => setDisplayGenre(true)}
+          onMouseLeave={() => setDisplayGenre(false)}
+        >
+          <Link
+            to={"#"}
+            className={`font-bold  ${
+              active === "genre" ? "text-yellow-400" : ""
+            }`}
+          >
+            Genre
+          </Link>
+          {displayGenre && (
+            <div className="absolute pt-5">
+              <DisplayGenre />
+            </div>
+          )}
+        </div>
         <Link
           to={"#"}
           className={`font-bold ${
-            clicked === "movies" ? "text-yellow-400" : ""
+            active === "movies" ? "text-yellow-400" : ""
           }`}
-          onClick={() => setClicked("movies")}
         >
           Movies
         </Link>
         <Link
           to={"#"}
           className={`font-bold ${
-            clicked === "tv_shows" ? "text-yellow-400" : ""
+            active === "tv_shows" ? "text-yellow-400" : ""
           }`}
-          onClick={() => setClicked("tv_shows")}
         >
           Tv Shows
         </Link>
         <Link
-          to={"#"}
-          className={`font-bold ${
-            clicked === "genre" ? "text-yellow-400" : ""
-          }`}
-          onClick={() => setClicked("genre")}
-        >
-          Genre
-        </Link>
-        <Link
           to={"/top"}
           className={`font-bold ${
-            clicked === "top_rated" ? "text-yellow-400" : ""
+            active === "top_rated" ? "text-yellow-400" : ""
           }`}
-          onClick={() => setClicked("top_rated")}
         >
           Top Rated
         </Link>
@@ -61,5 +68,9 @@ function LaptopView() {
     </div>
   );
 }
+
+LaptopView.propTypes = {
+  active: PropTypes.string,
+};
 
 export default LaptopView;

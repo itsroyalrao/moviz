@@ -1,9 +1,9 @@
+import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function MobileView() {
+function MobileView({ active }) {
   const [showItems, setShowItems] = useState(false);
-  const [clicked, setClicked] = useState("home");
 
   return (
     <div className="flex flex-col">
@@ -27,9 +27,8 @@ function MobileView() {
                 <Link
                   to={"#"}
                   className={`text-xl ${
-                    clicked === "profile" ? "text-yellow-400" : ""
+                    active === "profile" ? "text-yellow-400" : ""
                   }`}
-                  onClick={() => setClicked("profile")}
                 >
                   Profile
                 </Link>
@@ -39,9 +38,8 @@ function MobileView() {
                 <Link
                   to={"/"}
                   className={`text-xl ${
-                    clicked === "home" ? "text-yellow-400" : ""
+                    active === "home" ? "text-yellow-400" : ""
                   }`}
-                  onClick={() => setClicked("home")}
                 >
                   Home
                 </Link>
@@ -51,9 +49,8 @@ function MobileView() {
                 <Link
                   to={"#"}
                   className={`text-xl ${
-                    clicked === "movies" ? "text-yellow-400" : ""
+                    active === "movies" ? "text-yellow-400" : ""
                   }`}
-                  onClick={() => setClicked("movies")}
                 >
                   Movies
                 </Link>
@@ -63,9 +60,8 @@ function MobileView() {
                 <Link
                   to={"#"}
                   className={`text-xl ${
-                    clicked === "tv_shows" ? "text-yellow-400" : ""
+                    active === "tv_shows" ? "text-yellow-400" : ""
                   }`}
-                  onClick={() => setClicked("tv_shows")}
                 >
                   Tv Shows
                 </Link>
@@ -73,11 +69,10 @@ function MobileView() {
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-bars-staggered"></i>
                 <Link
-                  to={"#"}
+                  to={"/genre"}
                   className={`text-xl ${
-                    clicked === "genre" ? "text-yellow-400" : ""
+                    active === "genre" ? "text-yellow-400" : ""
                   }`}
-                  onClick={() => setClicked("genre")}
                 >
                   Genre
                 </Link>
@@ -87,9 +82,8 @@ function MobileView() {
                 <Link
                   to={"/top"}
                   className={`text-xl ${
-                    clicked === "top_rated" ? "text-yellow-400" : ""
+                    active === "top_rated" ? "text-yellow-400" : ""
                   }`}
-                  onClick={() => setClicked("top_rated")}
                 >
                   Top Rated
                 </Link>
@@ -117,5 +111,9 @@ function MobileView() {
     </div>
   );
 }
+
+MobileView.propTypes = {
+  active: PropTypes.string,
+};
 
 export default MobileView;
