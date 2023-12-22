@@ -40,9 +40,9 @@ function Movie() {
             }
             height={
               screenWidth > 1024
-                ? "512"
+                ? "640"
                 : screenWidth > 768
-                ? "384"
+                ? "360"
                 : screenWidth > 640
                 ? "320"
                 : "240"
