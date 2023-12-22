@@ -1,9 +1,11 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import DisplayGenre from "./DisplayGenre";
 
 function LaptopView({ active }) {
+  const navigate = useNavigate();
+
   const [displayGenre, setDisplayGenre] = useState(false);
   const [showInput, setShowInput] = useState(false);
   const [query, setQuery] = useState("");
@@ -75,6 +77,12 @@ function LaptopView({ active }) {
               autoFocus
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  if (query) navigate(`/search/${query}`);
+                  setQuery("");
+                }
+              }}
             />
           )}
           <Link

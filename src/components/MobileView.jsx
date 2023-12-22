@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function MobileView({ active }) {
+  const navigate = useNavigate();
+
   const [showItems, setShowItems] = useState(false);
   const [query, setQuery] = useState("");
 
@@ -108,6 +110,12 @@ function MobileView({ active }) {
           placeholder="Search..."
           value={query}
           onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              if (query) navigate(`/search/${query}`);
+              setQuery("");
+            }
+          }}
         />
         <Link
           to={`/search/${query}`}
