@@ -82,21 +82,10 @@ function MobileView({ active }) {
                   Top Rated
                 </Link>
               </div>
-              {/* <div className="flex items-center gap-2 font-bold cursor-pointer">
-                <i className="fas fa-bars-staggered"></i>
-                <Link
-                  to={"#"}
-                  className={`text-xl ${
-                    active === "genre" ? "text-yellow-400" : ""
-                  }`}
-                >
-                  Genre
-                </Link>
-              </div> */}
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-bars-staggered"></i>
                 <div
-                  className={`font-bold hover:text-yellow-400 ${
+                  className={`font-bold sm:hover:text-yellow-400 ${
                     active === "genre" ? "text-yellow-400" : ""
                   } cursor-pointer`}
                   onClick={() => setDisplayGenre(!displayGenre)}
