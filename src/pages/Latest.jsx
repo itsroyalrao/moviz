@@ -3,15 +3,13 @@ import { useEffect, useState } from "react";
 import { getMovies } from "../apis/getMovies";
 import DisplayMovies from "../components/DisplayMovies";
 
-function Home({ active }) {
+function Latest({ active }) {
   const [movies, setMovies] = useState(null);
   const [nextMovies, setNextMovies] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
   const apiKey = "74381893d3f7c586985415383c54bbf4";
-  // const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
-  const apiUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
-
+  const apiUrl = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
   useEffect(() => {
     (async () => {
       if (!movies) {
@@ -38,8 +36,8 @@ function Home({ active }) {
   );
 }
 
-Home.propTypes = {
+Latest.propTypes = {
   active: PropTypes.string,
 };
 
-export default Home;
+export default Latest;

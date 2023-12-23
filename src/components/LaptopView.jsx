@@ -22,7 +22,7 @@ function LaptopView({ active }) {
             active === "home" ? "text-yellow-400" : ""
           }`}
         >
-          Home
+          Now Playing
         </Link>
         <div
           onMouseEnter={() => setDisplayGenre(true)}
@@ -43,20 +43,12 @@ function LaptopView({ active }) {
           )}
         </div>
         <Link
-          to={"#"}
-          className={`font-bold hover:text-yellow-400 ${
-            active === "movies" ? "text-yellow-400" : ""
-          }`}
-        >
-          Movies
-        </Link>
-        <Link
-          to={"#"}
+          to={"/tv_shows"}
           className={`font-bold hover:text-yellow-400 ${
             active === "tv_shows" ? "text-yellow-400" : ""
           }`}
         >
-          Tv Shows
+          TV Shows
         </Link>
         <Link
           to={"/top"}
@@ -65,6 +57,22 @@ function LaptopView({ active }) {
           }`}
         >
           Top Rated
+        </Link>
+        <Link
+          to={"/latest"}
+          className={`font-bold hover:text-yellow-400 ${
+            active === "latest" ? "text-yellow-400" : ""
+          }`}
+        >
+          Upcoming
+        </Link>
+        <Link
+          to={"/future"}
+          className={`font-bold hover:text-yellow-400 ${
+            active === "future" ? "text-yellow-400" : ""
+          }`}
+        >
+          Future
         </Link>
       </div>
       <div className="flex items-center gap-4">
@@ -86,7 +94,7 @@ function LaptopView({ active }) {
             />
           )}
           <Link
-            to={showInput && `/search/${query}`}
+            to={showInput && query && `/search/${query}`}
             className={`fas fa-search text-2xl cursor-pointer text-black bg-yellow-400 px-[6px] py-[2px] ${
               showInput ? "rounded-e-full" : "rounded-full"
             }`}

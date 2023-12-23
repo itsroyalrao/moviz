@@ -1,10 +1,20 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
-function Card({ id, imageUrl, title, voteAverage, duration, releaseDate }) {
-  const [year] = releaseDate.split("-");
+function Card({
+  type,
+  id,
+  imageUrl,
+  title,
+  voteAverage,
+  duration,
+  releaseDate,
+}) {
+  if (releaseDate) {
+    var [year] = releaseDate.split("-");
+  }
   return (
-    <Link to={`/movie/${id}`} className="flex flex-col" title={title}>
+    <Link to={`/movie/${id}/${type}`} className="flex flex-col" title={title}>
       <img src={imageUrl} alt={title} className="grow" />
       <div className="p-2 pt-1">
         <div className="truncate">{title}</div>
@@ -19,6 +29,7 @@ function Card({ id, imageUrl, title, voteAverage, duration, releaseDate }) {
 }
 
 Card.propTypes = {
+  type: PropTypes.string,
   id: PropTypes.number,
   imageUrl: PropTypes.string,
   title: PropTypes.string,

@@ -1,11 +1,13 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import DisplayGenre from "./DisplayGenre";
 
 function MobileView({ active }) {
   const navigate = useNavigate();
 
   const [showItems, setShowItems] = useState(false);
+  const [displayGenre, setDisplayGenre] = useState(false);
   const [query, setQuery] = useState("");
 
   return (
@@ -37,47 +39,36 @@ function MobileView({ active }) {
                 </Link>
               </div>
               <div className="flex items-center gap-2 font-bold cursor-pointer">
-                <i className="fas fa-home"></i>
+                <i className="fa-regular fa-circle-play"></i>
                 <Link
                   to={"/"}
                   className={`text-xl ${
                     active === "home" ? "text-yellow-400" : ""
                   }`}
                 >
-                  Home
-                </Link>
-              </div>
-              <div className="flex items-center gap-2 font-bold cursor-pointer">
-                <i className="fas fa-film"></i>
-                <Link
-                  to={"#"}
-                  className={`text-xl ${
-                    active === "movies" ? "text-yellow-400" : ""
-                  }`}
-                >
-                  Movies
+                  Now Playing
                 </Link>
               </div>
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-tv"></i>
                 <Link
-                  to={"#"}
+                  to={"/tv_shows"}
                   className={`text-xl ${
                     active === "tv_shows" ? "text-yellow-400" : ""
                   }`}
                 >
-                  Tv Shows
+                  TV Shows
                 </Link>
               </div>
               <div className="flex items-center gap-2 font-bold cursor-pointer">
-                <i className="fas fa-bars-staggered"></i>
+                <i className="fa-solid fa-circle-nodes"></i>
                 <Link
-                  to={"/genre"}
+                  to={"/latest"}
                   className={`text-xl ${
-                    active === "genre" ? "text-yellow-400" : ""
+                    active === "latest" ? "text-yellow-400" : ""
                   }`}
                 >
-                  Genre
+                  Upcoming
                 </Link>
               </div>
               <div className="flex items-center gap-2 font-bold cursor-pointer">
@@ -91,15 +82,34 @@ function MobileView({ active }) {
                   Top Rated
                 </Link>
               </div>
+              {/* <div className="flex items-center gap-2 font-bold cursor-pointer">
+                <i className="fas fa-bars-staggered"></i>
+                <Link
+                  to={"#"}
+                  className={`text-xl ${
+                    active === "genre" ? "text-yellow-400" : ""
+                  }`}
+                >
+                  Genre
+                </Link>
+              </div> */}
+              <div className="flex items-center gap-2 font-bold cursor-pointer">
+                <i className="fas fa-bars-staggered"></i>
+                <div
+                  className={`font-bold hover:text-yellow-400 ${
+                    active === "genre" ? "text-yellow-400" : ""
+                  } cursor-pointer`}
+                  onClick={() => setDisplayGenre(!displayGenre)}
+                >
+                  Genre
+                </div>
+              </div>
             </div>
-            {/* <div className="w-full flex items-center">
-              <input
-                type="text"
-                className="w-full px-3 py-[6px] text-black rounded-s focus:outline-none"
-                placeholder="Search..."
-              />
-              <i className="fas fa-search text-2xl text-black bg-yellow-400 px-2 py-[2px] rounded-e cursor-pointer"></i>
-            </div> */}
+            {displayGenre && (
+              <div className="">
+                <DisplayGenre />
+              </div>
+            )}
           </div>
         </>
       )}

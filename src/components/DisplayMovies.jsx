@@ -1,42 +1,13 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
-import { getMovies } from "../apis/getMovies";
-import Card from "./Card";
 import Navbar from "./Navbar";
-import { handleInfiniteScroll } from "../helper/handleInfiniteScroll";
+import Card from "./Card";
 import { handleScreenWidth } from "../helper/handleScreenWidth";
+import { handleInfiniteScroll } from "../helper/handleInfiniteScroll";
 
-function DisplayMovies({ active, query }) {
-  const [movies, setMovies] = useState(null);
-  const [nextMovies, setNextMovies] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [showMovetoTop, setShowMovetoTop] = useState(false);
+function DisplayMovies({ type, movies, active, setPageNumber }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    (async () => {
-      if (!movies) {
-        const moviesData = await getMovies(pageNumber, active, query);
-        setMovies(moviesData);
-        const nextMoviesData = await getMovies(pageNumber + 1, active, query);
-        setNextMovies(nextMoviesData);
-      } else {
-        setMovies((prevMovies) => [...prevMovies, ...nextMovies]);
-        const nextMoviesData = await getMovies(pageNumber + 1, active, query);
-        setNextMovies(nextMoviesData);
-      }
-    })();
-  }, [pageNumber]);
-
-  useEffect(() => {
-    setMovies(null);
-    (async () => {
-      const moviesData = await getMovies(pageNumber, active, query);
-      setMovies(moviesData);
-      const nextMoviesData = await getMovies(pageNumber + 1, active, query);
-      setNextMovies(nextMoviesData);
-    })();
-  }, [query]);
+  const [showMovetoTop, setShowMovetoTop] = useState(false);
 
   useEffect(() => {
     handleScreenWidth(setScreenWidth);
@@ -48,6 +19,7 @@ function DisplayMovies({ active, query }) {
         : setShowMovetoTop(false);
     });
   }, [screenWidth]);
+
   return (
     <div className="h-[100svh] flex flex-col">
       <Navbar active={active} />
@@ -56,6 +28,7 @@ function DisplayMovies({ active, query }) {
           movies.map((movie) => (
             <div key={Math.random()}>
               <Card
+                type={type}
                 id={movie.id}
                 title={movie.title}
                 imageUrl={movie.imageUrl}
@@ -85,8 +58,61 @@ function DisplayMovies({ active, query }) {
 }
 
 DisplayMovies.propTypes = {
+  type: PropTypes.string,
   active: PropTypes.string,
-  query: PropTypes.string,
+  movies: PropTypes.any,
+  setPageNumber: PropTypes.func,
 };
 
 export default DisplayMovies;
+
+// import PropTypes from "prop-types";
+// import { useEffect, useState } from "react";
+// import { getMovies } from "../apis/getMovies";
+// import DisplayMovies from "./DisplayMovies";
+
+// function DisplayMovi({ active, query }) {
+//   const [movies, setMovies] = useState(null);
+//   const [nextMovies, setNextMovies] = useState(null);
+//   const [pageNumber, setPageNumber] = useState(1);
+
+//   useEffect(() => {
+//     (async () => {
+//       if (!movies) {
+//         const moviesData = await getMovies(pageNumber, active, query);
+//         setMovies(moviesData);
+//         const nextMoviesData = await getMovies(pageNumber + 1, active, query);
+//         setNextMovies(nextMoviesData);
+//       } else {
+//         setMovies((prevMovies) => [...prevMovies, ...nextMovies]);
+//         const nextMoviesData = await getMovies(pageNumber + 1, active, query);
+//         setNextMovies(nextMoviesData);
+//       }
+//     })();
+//   }, [pageNumber]);
+
+//   useEffect(() => {
+//     setMovies(null);
+//     (async () => {
+//       const moviesData = await getMovies(pageNumber, active, query);
+//       setMovies(moviesData);
+//       const nextMoviesData = await getMovies(pageNumber + 1, active, query);
+//       setNextMovies(nextMoviesData);
+//     })();
+//   }, [query]);
+
+//   return (
+//     <DisplayMovies
+//       movies={movies}
+//       active={active}
+//       setPageNumber={setPageNumber}
+//     />
+//   );
+// }
+
+// DisplayMovi.propTypes = {
+//   active: PropTypes.string,
+//   query: PropTypes.string,
+// };
+
+// export default DisplayMovi;

@@ -1,28 +1,25 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchMovieVideos, getMovieDetails } from "../apis/getMovies";
+import { getMovieVideos, getMovieDetails } from "../apis/getMovies";
 import Navbar from "../components/Navbar";
 import { handleScreenWidth } from "../helper/handleScreenWidth";
 import MovieDetails from "../components/MovieDetails";
 // import VideoPlayer from "../components/VideoPlayer";
 
 function Movie() {
-  const { id } = useParams();
+  const { id, type } = useParams();
+
   const [movieDetails, setMovieDetails] = useState(null);
   const [videos, setVideos] = useState(null);
-
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     (async () => {
-      setMovieDetails((await getMovieDetails(id)).data);
-      setVideos(await fetchMovieVideos(id));
+      setMovieDetails((await getMovieDetails(id, type)).data);
+      setVideos(await getMovieVideos(id));
     })();
   }, [id]);
 
-  if (videos) {
-    console.log(videos, 12121);
-  }
   useEffect(() => {
     handleScreenWidth(setScreenWidth);
   }, []);

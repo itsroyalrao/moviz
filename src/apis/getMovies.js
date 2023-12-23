@@ -1,30 +1,18 @@
 import axios from "axios";
 
 const apiKey = "74381893d3f7c586985415383c54bbf4";
-const imageUrlBase = "https://image.tmdb.org/t/p/w500";
 
-async function getMovies(pageNumber, section, query, genreId = null) {
-  let apiUrl;
-  if (section === "home") {
-    apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
-  } else if (section === "top_rated") {
-    apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=vote_average.desc&page=${pageNumber}`;
-  } else if (section === "genre") {
-    apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&with_genres=${genreId}&page=${pageNumber}`;
-  } else if (section === "search") {
-    apiUrl = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=${pageNumber}`;
-  }
-
+async function getMovies(apiUrl, type = "movie") {
   try {
     const response = await axios.get(apiUrl);
     const movies = response.data.results;
 
     if (movies) {
       const imageUrlPromises = movies.map(async (movie) => {
-        const response = await getMovieDetails(movie.id);
+        const response = await getMovieDetails(movie.id, type);
 
         if (response.data.poster_path) {
-          const imageUrl = `${imageUrlBase}${response.data.poster_path}`;
+          const imageUrl = `https://image.tmdb.org/t/p/w500${response.data.poster_path}`;
           return {
             imageUrl,
             duration: response.data.runtime,
@@ -32,7 +20,8 @@ async function getMovies(pageNumber, section, query, genreId = null) {
           };
         } else
           return {
-            imageUrl: "images/PosterNotAvailable.jpg",
+            imageUrl:
+              "https://www.tgv.com.my/assets/images/404/movie-poster.jpg",
             duration: response.data.runtime,
             releaseDate: response.data.release_date,
           };
@@ -53,9 +42,13 @@ async function getMovies(pageNumber, section, query, genreId = null) {
   }
 }
 
-const getMovieDetails = async (movieId) => {
+const getMovieDetails = async (movieId, type) => {
   try {
-    const apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`;
+    let apiUrl;
+    if (type === "movie")
+      apiUrl = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apiKey}&language=en-US`;
+    else
+      apiUrl = `https://api.themoviedb.org/3/tv/${movieId}?api_key=${apiKey}&language=en-US`;
 
     const response = await axios.get(apiUrl);
     return response;
@@ -64,12 +57,22 @@ const getMovieDetails = async (movieId) => {
   }
 };
 
-const fetchMovieVideos = async (movieId) => {
-  const response = await fetch(
-    `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`
-  );
-  const data = await response.json();
-  return data.results;
+const getMovieVideos = async (movieId) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`
+    );
+    return response.data.results;
+
+    // const response = await fetch(
+    //   `https://api.themoviedb.org/3/movie/${movieId}/videos?api_key=${apiKey}`
+    // );
+    // const data = await response.json();
+    // return data.results;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
 };
 
-export { getMovies, getMovieDetails, fetchMovieVideos };
+export { getMovies, getMovieDetails, getMovieVideos };

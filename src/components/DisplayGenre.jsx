@@ -80,8 +80,8 @@ function DisplayGenre() {
     },
   ];
   return (
-    <div className="flex flex-col justify-center items-center ps-4 py-2 bg-zinc-800">
-      <div className="grid grid-cols-4 gap-4">
+    <div className="flex flex-col justify-center items-center ps-4 py-2 lg:bg-zinc-800">
+      <div className="w-full grid grid-cols-3 sm:grid-cols-4 gap-4">
         {tmdbGenres.map((genre) => (
           <div key={genre.id}>
             <Link to={`/genre/${genre.name}`} className="hover:text-yellow-400">
