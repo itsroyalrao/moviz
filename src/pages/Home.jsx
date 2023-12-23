@@ -8,8 +8,7 @@ function Home({ active }) {
   const [nextMovies, setNextMovies] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
 
-  const apiKey = "74381893d3f7c586985415383c54bbf4";
-  // const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
+  const apiKey = import.meta.env.VITE_APIKEY;
   const apiUrl = `https://api.themoviedb.org/3/movie/now_playing?api_key=${apiKey}&language=en-US&page=${pageNumber}`;
 
   useEffect(() => {
@@ -43,3 +42,5 @@ Home.propTypes = {
 };
 
 export default Home;
+
+// const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&language=en-US&page=${pageNumber}`;

@@ -91,7 +91,7 @@ function Genre({ active }) {
   ];
   const genreId = tmdbGenres.find((genre) => genre.name === name).id;
 
-  const apiKey = "74381893d3f7c586985415383c54bbf4";
+  const apiKey = import.meta.env.VITE_APIKEY;
   const apiUrl = `https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}&language=en-US&sort_by=popularity.desc&with_genres=${genreId}&page=${pageNumber}`;
 
   useEffect(() => {

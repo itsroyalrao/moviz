@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiKey = "74381893d3f7c586985415383c54bbf4";
+const apiKey = import.meta.env.VITE_APIKEY;
 
 async function getMovies(apiUrl, type = "movie") {
   try {
