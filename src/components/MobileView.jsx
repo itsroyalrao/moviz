@@ -85,7 +85,7 @@ function MobileView({ active }) {
               <div className="flex items-center gap-2 font-bold cursor-pointer">
                 <i className="fas fa-bars-staggered"></i>
                 <div
-                  className={`font-bold sm:hover:text-yellow-400 ${
+                  className={`font-bold text-xl sm:hover:text-yellow-400 ${
                     active === "genre" ? "text-yellow-400" : ""
                   } cursor-pointer`}
                   onClick={() => setDisplayGenre(!displayGenre)}
