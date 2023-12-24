@@ -37,7 +37,7 @@ function SearchMovies({ active }) {
       const nextMoviesData = await getMovies(apiUrl, "movie");
       setNextMovies(nextMoviesData);
     })();
-  }, []);
+  }, [query]);
   return (
     <>
       <DisplayMovies
