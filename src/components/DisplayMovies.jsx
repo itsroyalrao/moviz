@@ -44,7 +44,7 @@ function DisplayMovies({ type, movies, active, setPageNumber }) {
         <i
           className={`fas fa-arrow-up fixed ${
             screenWidth > 640 ? "bottom-9 right-12" : "bottom-5 right-4"
-          } text-xl bg-yellow-400 px-[19px] py-3 rounded-full cursor-pointer`}
+          } text-xl text-black bg-yellow-400 px-[19px] py-3 rounded-full cursor-pointer`}
           onClick={() =>
             window.scrollTo({
               top: 0,

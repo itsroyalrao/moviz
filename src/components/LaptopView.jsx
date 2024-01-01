@@ -103,26 +103,7 @@ function LaptopView({ active }) {
             }}
           ></Link>
         </div>
-        {/* <div className="flex items-center">
-          <input
-            type="text"
-            className={`w-[0px] px-5 py-[6px] text-black rounded-s-full focus:outline-none transition-all duration-500`}
-            placeholder="Search..."
-            style={{
-              width: showInput ? "160px" : "0px",
-              opacity: showInput ? 1 : 0,
-              marginLeft: showInput ? "5px" : "0px",
-            }}
-          />
-          <i
-            className={`fas fa-search text-2xl cursor-pointer px-[6px] py-[2px] ${
-              showInput
-                ? "rounded-e-full text-black bg-yellow-400"
-                : "hover:text-yellow-400"
-            }`}
-            onClick={() => setShowInput((prevShowInput) => !prevShowInput)}
-          ></i>
-        </div> */}
+
         <Link className="fas fa-user-circle text-4xl text-yellow-400"></Link>
       </div>
     </div>
