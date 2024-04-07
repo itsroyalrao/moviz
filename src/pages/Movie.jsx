@@ -27,26 +27,12 @@ function Movie() {
     <div className="flex flex-col">
       <Navbar />
 
-      <div className="pt-3">
-        {videos && (
-          // <VideoPlayer
-          //   videoId={
-          //     videos.length
-          //       ? videos.find((movie) => movie.type === "Trailer").key
-          //       : ""
-          //   }
-          //   height={
-          //     screenWidth > 1024
-          //       ? "640"
-          //       : screenWidth > 768
-          //       ? "360"
-          //       : screenWidth > 640
-          //       ? "320"
-          //       : "240"
-          //   }
-          //   width="100%"
-          // />
+      {movieDetails && (
+        <MovieDetails movieDetails={movieDetails} screenWidth={screenWidth} />
+      )}
 
+      <div className="pb-9 flex justify-center">
+        {videos && (
           <iframe
             title="video-player"
             height={
@@ -58,7 +44,7 @@ function Movie() {
                 ? "320"
                 : "240"
             }
-            width="100%"
+            width="94%"
             src={`https://www.youtube.com/embed/${
               videos.length
                 ? videos.find((movie) => movie.type === "Trailer").key
@@ -69,12 +55,26 @@ function Movie() {
           />
         )}
       </div>
-
-      {movieDetails && (
-        <MovieDetails movieDetails={movieDetails} screenWidth={screenWidth} />
-      )}
     </div>
   );
 }
 
 export default Movie;
+
+// <VideoPlayer
+//   videoId={
+//     videos.length
+//       ? videos.find((movie) => movie.type === "Trailer").key
+//       : ""
+//   }
+//   height={
+//     screenWidth > 1024
+//       ? "640"
+//       : screenWidth > 768
+//       ? "360"
+//       : screenWidth > 640
+//       ? "320"
+//       : "240"
+//   }
+//   width="100%"
+// />
