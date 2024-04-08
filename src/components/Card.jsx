@@ -6,23 +6,27 @@ function Card({
   id,
   imageUrl,
   title,
+  overview,
   voteAverage,
   duration,
   releaseDate,
 }) {
-  if (releaseDate) {
-    var [year] = releaseDate.split("-");
-  }
+
   return (
-    <Link to={`/movie/${id}/${type}`} className="flex flex-col" title={title}>
-      <img src={imageUrl} alt={title} className="grow" />
-      <div className="p-2 pt-1">
+    <Link
+      to={`/movie/${id}/${type}`}
+      className="flex flex-col hover:scale-110 transition-transform duration-300 ease-in-out"
+      title={title}
+    >
+      <img
+        src={imageUrl}
+        alt={title}
+        className={`grow h-72 rounded-t`}
+      />
+      <div
+        className={`p-2 pt-1 bg-black rounded-b`}
+      >
         <div className="truncate">{title}</div>
-        <div className="flex justify-between text-gray-300 text-sm">
-          <div className="bg-zinc-800 px-2 rounded">{voteAverage}</div>
-          <div>{duration}m</div>
-          <div> {year} </div>
-        </div>
       </div>
     </Link>
   );
@@ -33,9 +37,22 @@ Card.propTypes = {
   id: PropTypes.number,
   imageUrl: PropTypes.string,
   title: PropTypes.string,
+  overview: PropTypes.string,
   releaseDate: PropTypes.string,
   voteAverage: PropTypes.number,
   duration: PropTypes.number,
 };
 
 export default Card;
+
+// if (releaseDate) {
+//   var [year] = releaseDate.split("-");
+// }
+
+{
+  /* <div className="flex justify-between text-gray-300 text-sm">
+  <div className="bg-zinc-800 px-2 rounded">{voteAverage}</div>
+  <div>{duration}m</div>
+  <div> {year} </div>
+  </div> */
+}

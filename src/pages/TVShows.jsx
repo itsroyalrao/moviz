@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { getMovies } from "../apis/getMovies";
-import DisplayMovies from "../components/DisplayMovies";
+import DisplayTVShows from "../components/DisplayTVSHows";
 
 function TVShows({ active }) {
   const [movies, setMovies] = useState(null);
@@ -27,7 +27,7 @@ function TVShows({ active }) {
   }, [apiUrl]);
   return (
     <>
-      <DisplayMovies
+      <DisplayTVShows
         movies={movies}
         active={active}
         setPageNumber={setPageNumber}

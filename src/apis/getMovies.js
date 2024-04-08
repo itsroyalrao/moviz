@@ -75,4 +75,16 @@ const getMovieVideos = async (movieId) => {
   }
 };
 
-export { getMovies, getMovieDetails, getMovieVideos };
+const getEpisodesVideos = async (tvShowId, seasonNumber) => {
+  try {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/tv/${tvShowId}/season/${seasonNumber}?api_key=${apiKey}`
+    );
+    return response;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+};
+
+export { getMovies, getMovieDetails, getMovieVideos, getEpisodesVideos };

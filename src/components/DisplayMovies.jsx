@@ -23,15 +23,17 @@ function DisplayMovies({ type, movies, active, setPageNumber }) {
   return (
     <div className="h-[100svh] flex flex-col">
       <Navbar active={active} />
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 gap-1 p-3">
+      <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7 ${
+          screenWidth > 678 ? "gap-4 p-5" : "gap-2 p-3"
+        }`}>
         {movies &&
           movies.map((movie) => (
             <div key={Math.random()}>
               <Card
                 type={type}
                 id={movie.id}
-                title={movie.title}
                 imageUrl={movie.imageUrl}
+                title={movie.title}
                 overview={movie.overview}
                 voteAverage={movie.vote_average}
                 duration={movie.duration}
