@@ -9,7 +9,6 @@ function DisplayTVShows({ type, movies, active, setPageNumber }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const [showMovetoTop, setShowMovetoTop] = useState(false);
 
-  console.log(movies);
   useEffect(() => {
     handleScreenWidth(setScreenWidth);
 

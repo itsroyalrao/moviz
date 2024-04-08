@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 function MovieDetails({ type, movieDetails, screenWidth }) {
   const [episodes, setEpisodes] = useState([]);
 
-  console.log(episodes);
   return (
     <div className="flex flex-col">
       <div className={`flex ${screenWidth <= 768 && "flex-col"} gap-6 p-12`}>
@@ -70,35 +69,39 @@ function MovieDetails({ type, movieDetails, screenWidth }) {
           )}
         </div>
       </div>
-      <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12 gap-2 p-2 m-4 bg-[#242424] rounded">
-        {episodes.map((item) => (
-          <Link to={`https://vidsrc.to/embed/tv/${item.id}/${item.season_number}/${item.episode_number}`}
-            key={item.id}
-            className="bg-black font-semibold p-4 rounded hover:scale-105 cursor-pointer"
-          >
-            <div>{item.name}</div>
-          </Link>
-        ))}
-      </div>
-      <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12 gap-2 p-4">
-        {movieDetails.seasons.map((item) => (
-          <div key={item.id}>
-            <div
-              className="bg-yellow-400 text-black font-semibold p-4 rounded hover:scale-105 cursor-pointer"
-              onClick={async () => {
-                const result = await getEpisodesVideos(
-                  item.id,
-                  item.season_number
-                );
-                setEpisodes(result.data.episodes);
-                console.log("result ->", result);
-              }}
-            >
-              {item.name}
-            </div>
+      {type === "tv_shows" && (
+        <>
+          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12 gap-2 p-2 m-4 bg-[#242424] rounded">
+            {episodes.map((item) => (
+              <Link
+                to={`https://vidsrc.to/embed/tv/${item.id}/${item.season_number}/${item.episode_number}`}
+                key={item.id}
+                className="bg-black font-semibold p-4 rounded hover:scale-105 cursor-pointer"
+              >
+                <div>{item.name}</div>
+              </Link>
+            ))}
           </div>
-        ))}
-      </div>
+          <div className="grid grid-cols-3 sm:grid-cols-5 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-10 2xl:grid-cols-12 gap-2 p-4">
+            {movieDetails.seasons.map((item) => (
+              <div key={item.id}>
+                <div
+                  className="bg-yellow-400 text-black font-semibold p-4 rounded hover:scale-105 cursor-pointer"
+                  onClick={async () => {
+                    const result = await getEpisodesVideos(
+                      item.id,
+                      item.season_number
+                    );
+                    setEpisodes(result.data.episodes);
+                  }}
+                >
+                  {item.name}
+                </div>
+              </div>
+            ))}
+          </div>
+        </>
+      )}
     </div>
   );
 }
