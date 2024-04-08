@@ -117,7 +117,7 @@ function MobileView({ active }) {
           }}
         />
         <Link
-          to={`/search/${query}`}
+          to={query && `/search/${query}`}
           className="fas fa-search text-2xl text-black bg-yellow-400 px-2 py-[2px] rounded-e cursor-pointer"
         ></Link>
       </div>
